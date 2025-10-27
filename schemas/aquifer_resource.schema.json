@@ -82,11 +82,11 @@
             "properties": {
                 "aquifer_type": {
                     "type": "string",
-                    "enum": ["Videos", "StudyNotes", "Dictionary", "Guide"]
+                    "enum": ["Images","Videos", "StudyNotes", "Dictionary", "Guide"]
                 },
                 "resource_type": {
                     "type": "string",
-                    "enum": ["Images, Maps, Videos","Study Notes","Bible Dictionary","Bible Translation Manual"]
+                    "enum": ["Translation Glossary", "Comprehension Testing", "Translation Guide", "Foundational Bible Stories","Images, Maps, Videos","Study Notes","Bible Dictionary","Bible Translation Manual"]
                 },
                 "title": {
                     "type": "string"
@@ -186,8 +186,7 @@
             "additionalProperties": false,
             "properties": {
                 "dates": {
-                    "type": "string",
-                    "format": "integer"
+                    "type":["string", "null"]
                 },
                 "holder": {
                     "$ref": "#/definitions/Holder"
