@@ -1,0 +1,128 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "type": "array",
+    "items": {
+        "$ref": "#/definitions/AquiferArticle"
+    },
+    "definitions": {
+        "AquiferArticle": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "content_id": {
+                    "type": "integer"
+                },
+                "reference_id": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "media_type": {
+                    "type": "string"
+                },
+                "index_reference": {
+                    "type": "string"
+                },
+                "language": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "associations": {
+                    "$ref": "#/definitions/Associations"
+                }
+            },
+            "required": [
+                "content",
+                "content_id",
+                "index_reference",
+                "language",
+                "media_type",
+                "reference_id",
+                "title"
+            ],
+            "title": "AquiferArticle"
+        },
+        "Associations": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "passage": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Passage"
+                    }
+                },
+                "resource": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Resource"
+                    }
+                }
+            },
+            "required": [
+                "passage",
+                "resource"
+            ],
+            "title": "Associations"
+        },
+        "Passage": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "start_ref": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "start_ref_usfm": {
+                    "type": "string"
+                },
+                "end_ref": {
+                    "type": "string",
+                    "format": "integer"
+                },
+                "end_ref_usfm": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "end_ref",
+                "end_ref_usfm",
+                "start_ref",
+                "start_ref_usfm"
+            ],
+            "title": "Passage"
+        },
+        "Resource": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "reference_id": {
+                    "type": "integer"
+                },
+                "content_id": {
+                    "type": "integer"
+                },
+                "resource_code": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "language": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "content_id",
+                "label",
+                "language",
+                "reference_id",
+                "resource_code"
+            ],
+            "title": "Resource"
+        }
+    }
+}
