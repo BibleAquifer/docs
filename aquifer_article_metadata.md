@@ -29,6 +29,7 @@ For canonically-ordered resources, each content file represents the material of 
 
 For other resources (alphabetially ordered and monograph resources), each file, while still a list of articles, only contains information for one article. The files are named like `NNNNNN.content.(json|md)` If the files are sorted in an ascending order, the content of the resource will be in the proper order.
 
+* `version`: The version of the JSON schema `aquifer_article.schema.json` (located in `/schemas`) the metadata has been validated against. This is currently set at `1.0.0`. 
 * `content_id`: The `content_id`
 * `reference_id`: If the `content_id` is used in a reference in the aquifer, it may use the `reference_id` for navigation.
 * `index_reference`: The article sort key, essentially. For canonically-ordered resources, it is an eight-digit string representing the book, chapter, and verse of the Bible reference (`BBCCCVVV`). It may also indicate a range, with two references (`BBCCCVVV`–`BBCCCVVV`). For alphabetically-ordered resources, it is the sort key used (lower-cased article title, typically).
