@@ -19,7 +19,7 @@ This list is not in any particular order and order does not imply priority of it
 * Aquifer Linking Specification / Documentation
   * specifying Bible references
   * specifying links to other Aquifer resources
-  * specifying ACAI links
+  * specifying [ACAI](https://github.com/BibleAquifer/ACAI) links
 * Aquifer Resource Registry
 * Images, Audio, and other media
   * currently only have (usable, valid) links to the media item
