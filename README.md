@@ -10,7 +10,7 @@ Documentation for JSON schemas and other material
 ## JSON schemas
 
 * `schemas/aquifer_resource.schema.json`: Currently version `1.0.0`. The resource metadata JSON file `metadata.json` should conform to the current version of this schema.
-* `schemas/aquifer_article.schema.json`: Currently version `1.0.0`. The content JSON files (e.g. `01.content.json` for canonically-ordered resources, `000001.content.json` for others) should conform tot he current version of this schema.
+* `schemas/aquifer_article.schema.json`: Currently version `1.0.0`. The content JSON files (e.g. `01.content.json` for canonically-ordered resources, `000001.content.json` for others) should conform to the current version of this schema.
 
 ## Forthcoming
 
