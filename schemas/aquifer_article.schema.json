@@ -1,5 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-06/schema#",
+    "$schemaVersion": "1.0.0",
     "type": "array",
     "items": {
         "$ref": "#/definitions/AquiferArticle"
@@ -9,6 +10,10 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
+                "version": {
+                    "type": "string",
+                    "enum": ["1.0.0"]
+                },
                 "content_id": {
                     "type": "integer"
                 },
@@ -35,6 +40,7 @@
                 }
             },
             "required": [
+                "version",
                 "content",
                 "content_id",
                 "index_reference",

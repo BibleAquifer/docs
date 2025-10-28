@@ -1,6 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-06/schema#",
     "$ref": "#/definitions/AquiferResource",
+    "$schemaVersion": "1.0.0",
     "definitions": {
         "AquiferResource": {
             "type": "object",
@@ -80,6 +81,10 @@
             "type": "object",
             "additionalProperties": false,
             "properties": {
+                "version": {
+                    "type": "string",
+                    "enum": ["1.0.0"]
+                },
                 "aquifer_type": {
                     "type": "string",
                     "enum": ["Images","Videos", "StudyNotes", "Dictionary", "Guide"]
@@ -132,6 +137,7 @@
                 }
             },
             "required": [
+                "version",
                 "adaptation_notice",
                 "aquifer_name",
                 "aquifer_type",
