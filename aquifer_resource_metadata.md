@@ -33,6 +33,7 @@ The JSON has three top-level sections:
 
 The `resource_metadata` is a dictionary that contains a large amount of resource-level information.
 
+* `version`: The version of the JSON schema `aquifer_resource.schema.json` (located in `/schemas`) the metadata has been validated against. This is currently set at `1.0.0`. 
 * `aquifer_type`: The database that drives the Aquifer has its own abbreviated resource typing. 
   * `StudyNotes`
   * `Images`
