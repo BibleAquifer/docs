@@ -1,7 +1,10 @@
 # Aquifer Resource Metadata JSON
 
 * **Author:** Rick Brannan (`rickb@missionmutual.org`)
-* **Date:** 2025-10-15
+* **Date:** 2025-10-15 (`1.0.0`)
+* **Updated:** 2025-11-14 (`1.0.1`)
+* **Updated:** 2025-11-21 (`1.0.2`). Introduce value `Bible` for `aquifer_type`, `resource_type`, and `content_type`.
+
 
 # Introduction
 
@@ -14,12 +17,13 @@ This document uses vocabulary with specific meaning in the context of the Aquife
 * **Resource**: A **Resource** is a specific language version of a whole content piece. For example, the _Biblica Study Notes_ in English is a **Resource**. The _Biblica Study Notes_ in Arabic is a different resource.
 * **Parent Resource**: A **Parent Resource** is the collection of all available languages of a particular content piece.
 * **Resource Type**: The Aquifer presently defines the following **Resource Types**:
+  * Bible
   * Study Notes
   * Bible Dictionaries
   * Translation Guides
   * Images
   * Videos
-* **Article**: An **Article** is essentially a record within a **Resource**. So the _Biblica Study Notes_ entry for “Genesis 1:1–2:25” is an **Article**.
+* **Article**: An **Article** is essentially a record within a non-Bible **Resource**. So the _Biblica Study Notes_ entry for “Genesis 1:1–2:25” is an **Article**.
 
 # JSON
 
@@ -27,19 +31,21 @@ The JSON has three top-level sections:
 
 * `resource_metadata`: Information about the resource itself. Titles, licensing information, localization information, etc.
 * `scripture_burrito`: Resource metadata reformulated (and expanded where necessary) to be _mostly_ compliant with the [Scripture Burrito metadata specification](https://burrito.bible). 
-* `article_metadata`: Information about each article (identifiers and sorting information) as well as localization information. The localization information includes identifiers of translations of the article in other languages.
+* `article_metadata`: Information about each article (identifiers and sorting information) as well as localization information. The localization information includes identifiers of translations of the article in other languages. At present (2025-11-21) Bibles have no `article_metadata` as Bibles are provided as both USFM and USX, with supplementary audio information if available.
 
 ## `resource_metadata`
 
 The `resource_metadata` is a dictionary that contains a large amount of resource-level information.
 
-* `version`: The version of the JSON schema `aquifer_resource.schema.json` (located in `/schemas`) the metadata has been validated against. This is currently set at `1.0.0`. 
+* `version`: The version of the JSON schema `aquifer_resource.schema.json` (located in `/schemas`) the metadata has been validated against. This is currently set at `1.0.2`. 
 * `aquifer_type`: The database that drives the Aquifer has its own abbreviated resource typing. 
+  * `Bible`
   * `StudyNotes`
   * `Images`
   * `Dictionary`
   * `Guide`
 * `resource_type`: A string identifier providing the **Resource Type**. These identifiers are based on material from the [Strategic Languages Initiative](https://etenlab.notion.site/SLI-Resource-Types-00c9e1ce6d6c426b982e57819c045538). The following string identifiers are currently used and supported:
+  * `Bible`
   * `Bible Dictionary`
   * `Comprehension Testing`
   * `Foundational Bible Stories`
@@ -68,7 +74,7 @@ The `resource_metadata` is a dictionary that contains a large amount of resource
   * `canonical`: The order of the resource follows that of the protestant canon. There are files for each included Bible book named based on the numeric position of the book in the canon. `01.json` is Genesis, which includes all resource articles for Genesis. `40.json` is Matthew, which includes all resource articles for Matthew.
   * `alphabetical`: The order of the resource is alphabetical. Each **Article** in the resource is a separate file, and files are named numerically (and padded to six digits to support easy sorting). So the first **Article** in the resource is `000001.json` (or `000001.md`)
   * `monograph`: The articles in the resource progress one from the other, like chapters and sections in a book. These as well are named like `000001.json` to provide a sorting order to the articles.
-* `content_type`: Currently two possible types, `Html` or `Json`. In practice, however, the `content_type` is usually `Html`. This indicates that the `content` section of the **Article** in resource JSON is encoded as HTML.
+* `content_type`: Three possible types, `Html`, `Json`, or `Bible`. In practice, however, the `content_type` is usually `Html` for non-Bible resources. This indicates that the `content` section of the **Article** in resource JSON is encoded as HTML. Earlier unpublished prototypes of this data used `JSON`, which should be considered as deprecated.
 
 
 ## `scripture_burrito`
@@ -106,7 +112,8 @@ There are eight top-level properties, each of which may have lists or dictionari
 	  * _language-name_: String representation of the language code 
 * `type`: Information about the type of _Scripture Burrito_ the resource intendes to specify.
   * `flavorType`: A dictionary with information regarding how to process the Resource
-    * `name`: The `name` of the Scripture Burrito type. For Aquifer documents, there are two possibilities:
+    * `name`: The `name` of the Scripture Burrito type. For Aquifer documents, there are three possibilities:
+	  * `scripture`: This is a Bible
 	  * `parascriptural`: Usually non-Bible items that are ordered canonically
 	  * `peripheral`: Items that can be classified as Biblical Studies related but not ordered canonically.
 	* `flavor`: Each Scripture Burrito type has at least one `flavor` and possibly more. Each `flavor` has two properties:
@@ -118,7 +125,7 @@ There are eight top-level properties, each of which may have lists or dictionari
     * `currentScope`: Always an empty dictionary (`{}`)
 * `ingredients`: Keeping with the “burrito” metaphor, The `ingredients` is a list of file information that make the resource (“burrito”). It is a list of dictionaries with the key representative of a relative file path (with base as `metadata.json`) and then further file information.
   * `folder/filename.ext`: The relative path to the file. Contains a dictionary with further file-level information.
-    * `mimeType`: For Aquifer, at present, either `text/json` or `text/markdown`.
+    * `mimeType`: Supported values include: `text/json`, `text/markdown`, `application/pdf`, `application/word`.
 	* `size`: Size in bytes of the file.
 	* `scope`: For canonically-ordered resources, information about Bible books that is reflected within the current file.
 * `copyright`: Information about copyright and licensing of the resource.
@@ -134,6 +141,8 @@ There are eight top-level properties, each of which may have lists or dictionari
 
 The `article_metadata` consists of a list of keys to dictionaries that contain localization information about each article. The keys are resource article `content_id` values. They are also sorted in resource order, allowing reconstitution of the resource by article if necessary.
 
+At present, Bibles do not have any article metadata.
+
 This information is useful to navigate across localized editions of resources. It is also appropriate to use to train translation models that rely on parallel data.
 
 * _content_id_: The resource article `content_id`. 
@@ -145,4 +154,3 @@ This information is useful to navigate across localized editions of resources. I
     * `content_id`: This is the `content_id` of the localized article.
 	* _language-id_: This is the ISO three-letter language identifier used by the Aquifer.
 	* `title`: This is the localized title of the article.
-

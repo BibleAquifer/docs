@@ -1,7 +1,8 @@
 # Aquifer Article Metadata JSON
 
 * **Author:** Rick Brannan (`rickb@missionmutual.org`)
-* **Date:** 2025-10-16
+* **Date:** 2025-10-16 (`1.0.0`)
+* **Updated:** 2025-11-14 (`1.0.1`). Added `review_level` to schema.
 
 # Introduction
 
@@ -14,6 +15,7 @@ This document uses vocabulary with specific meaning in the context of the Aquife
 * **Resource**: A **Resource** is a specific language version of a whole content piece. For example, the _Biblica Study Notes_ in English is a **Resource**. The _Biblica Study Notes_ in Arabic is a different resource.
 * **Parent Resource**: A **Parent Resource** is the collection of all available languages of a particular content piece.
 * **Resource Type**: The Aquifer presently defines the following **Resource Types**:
+  * Bibles
   * Study Notes
   * Bible Dictionaries
   * Translation Guides
@@ -29,7 +31,7 @@ For canonically-ordered resources, each content file represents the material of 
 
 For other resources (alphabetially ordered and monograph resources), each file, while still a list of articles, only contains information for one article. The files are named like `NNNNNN.content.(json|md)` If the files are sorted in an ascending order, the content of the resource will be in the proper order.
 
-* `version`: The version of the JSON schema `aquifer_article.schema.json` (located in `/schemas`) the metadata has been validated against. This is currently set at `1.0.0`. 
+* `version`: The version of the JSON schema `aquifer_article.schema.json` (located in `/schemas`) the metadata has been validated against. This is currently set at `1.0.1`. 
 * `content_id`: The `content_id`
 * `reference_id`: If the `content_id` is used in a reference in the aquifer, it may use the `reference_id` for navigation.
 * `index_reference`: The article sort key, essentially. For canonically-ordered resources, it is an eight-digit string representing the book, chapter, and verse of the Bible reference (`BBCCCVVV`). It may also indicate a range, with two references (`BBCCCVVV`–`BBCCCVVV`). For alphabetically-ordered resources, it is the sort key used (lower-cased article title, typically).
@@ -37,6 +39,10 @@ For other resources (alphabetially ordered and monograph resources), each file, 
   * `Text`
   * `Image`
   * `Video`
+* `review_level`: Three possible levels: `None`, `Community`, `Professional`.
+  * `None`: The article is as supplied from a content provider
+  * `Community`: The article has community-level revisions
+  * `Professional`: The article has had editorial attention from the Aquifer translation and editorial staff
 * `language`: A three-letter code compatible with the ISO three-letter language codes.
 * `content`: An HTML representation of the article content. Some specialized elements (for linking and sometimes media) do occur; we will offer documentation of this HTML elsewhere. In the Markdown generated from this HTML, Bible references are enabled as links to Logos Bible Software's [ref.ly Bible reference linking system](https://ref.ly). This will probably change to something else, but for the short-term it provides a destination for these links.
 * `associations`: This is article-level metadata regarding different types of links or relationships between this article and other articles. The "other articles" may be within the current resource, within a different resource, or to the Bible (by book, chapter, verse reference). Essentially, these are destinations you may be interested in examining based on the article. For _Study Notes_ resources, the reference of the note is usually included as a `passage` association. Many _Study Notes_ resources have related key-term style resources (typically implemented as sidebars or backmatter in print editions); these sorts of references are included as `resource` associations. Still to-do on `resource` associations: Include the resource name of the destination to facilitate easier link generation.

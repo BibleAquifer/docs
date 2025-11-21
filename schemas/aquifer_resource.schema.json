@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-06/schema#",
     "$ref": "#/definitions/AquiferResource",
-    "$schemaVersion": "1.0.0",
+    "$schemaVersion": "1.0.2",
     "definitions": {
         "AquiferResource": {
             "type": "object",
@@ -83,15 +83,15 @@
             "properties": {
                 "version": {
                     "type": "string",
-                    "enum": ["1.0.0"]
+                    "enum": ["1.0.0", "1.0.1", "1.0.2"]
                 },
                 "aquifer_type": {
                     "type": "string",
-                    "enum": ["Images","Videos", "StudyNotes", "Dictionary", "Guide"]
+                    "enum": ["Bible","Images","Videos", "StudyNotes", "Dictionary", "Guide"]
                 },
                 "resource_type": {
                     "type": "string",
-                    "enum": ["Translation Glossary", "Comprehension Testing", "Translation Guide", "Foundational Bible Stories","Images, Maps, Videos","Study Notes","Bible Dictionary","Bible Translation Manual"]
+                    "enum": ["Bible","Translation Glossary", "Comprehension Testing", "Translation Guide", "Foundational Bible Stories","Images, Maps, Videos","Study Notes","Bible Dictionary","Bible Translation Manual"]
                 },
                 "title": {
                     "type": "string"
@@ -133,7 +133,7 @@
                 },
                 "content_type": {
                     "type": "string",
-                    "enum": ["Html", "Json"]
+                    "enum": ["Html", "Json", "Bible"]
                 }
             },
             "required": [
@@ -458,7 +458,8 @@
             "additionalProperties": false,
             "properties": {
               "mimeType": {
-                "type": "string"
+                "type": "string",
+                "enum": ["text/json", "text/markdown", "application/pdf", "application/docx", "application/xml", "text/plain"]
               },
               "size": {
                 "type": "integer"
@@ -558,7 +559,11 @@
         },
         "CurrentScope": {
             "type": "object",
-            "additionalProperties": false,
+            "patternProperties": {
+              "^[A-Z123]{3}$": {
+                "type": "array",
+                "items": {}
+              }},
             "title": "CurrentScope"
         },
         "Flavor": {
