@@ -4,6 +4,7 @@
 * **Date:** 2025-10-15 (`1.0.0`)
 * **Updated:** 2025-11-14 (`1.0.1`)
 * **Updated:** 2025-11-21 (`1.0.2`). Introduce value `Bible` for `aquifer_type`, `resource_type`, and `content_type`.
+* **Updated:** 2025-12-11 (`1.1.0`). Add `alignment_metadata` section.
 
 
 # Introduction
@@ -32,6 +33,7 @@ The JSON has three top-level sections:
 * `resource_metadata`: Information about the resource itself. Titles, licensing information, localization information, etc.
 * `scripture_burrito`: Resource metadata reformulated (and expanded where necessary) to be _mostly_ compliant with the [Scripture Burrito metadata specification](https://burrito.bible). 
 * `article_metadata`: Information about each article (identifiers and sorting information) as well as localization information. The localization information includes identifiers of translations of the article in other languages. At present (2025-11-21) Bibles have no `article_metadata` as Bibles are provided as both USFM and USX, with supplementary audio information if available.
+* `alignment_metadata`: Optional information about Bible alignments available in a resource of `type` Bible.
 
 ## `resource_metadata`
 
@@ -154,3 +156,17 @@ This information is useful to navigate across localized editions of resources. I
     * `content_id`: This is the `content_id` of the localized article.
 	* _language-id_: This is the ISO three-letter language identifier used by the Aquifer.
 	* `title`: This is the localized title of the article.
+
+## `alignment_metadata`
+
+The `alignment_metadata` is an optional section that provides information about Bible alignments available in a resource of `type` Bible.
+
+* `alignment_source`: A URL string indicating the source (github repository) of the alignment data.
+* `alignment_ot_basis`: A string indicating the edition/source/basis for the Old Testament alignment data. There are two possible values:
+  * `WLCM`: The Westminster Leningrad Codex as implemented in Biblica's [Macula Hebrew](https://github.com/Clear-Bible/macula-hebrew) dataset.
+  * `WLC`: The Westminster Leningrad Codex (unknown). No aligments currently use this basis.
+* `alignment_nt_basis`: A string indicating the edition/source/basis for the New Testament alignment data. There are two possible values:
+  * `SBLGNT`: _The SBL Greek New Testament_ as implemented in Biblica's [Macula Greek](https://github.com/Clear-Bible/macula-greek) dataset.
+  * `GNTB`: _The Greek New Testament by Biblica_. No alignments currently use this basis. The edition is forthcoming.
+* `licenses`: A list of dictionaries that provide a URL for each supported license.
+* `target_token_differences`: A dictionary that indicates differences between Bible editions used as alignment targets. Generally, alignments in the Aquifer are imported from Biblica's available alignments. The Bible edition used by Biblica is compared to the Bible edition used by the Aquifer. The differences for tokens are included in this list.
