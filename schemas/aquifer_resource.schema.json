@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-06/schema#",
     "$ref": "#/definitions/AquiferResource",
-    "$schemaVersion": "1.0.2",
+    "$schemaVersion": "1.1.2",
     "definitions": {
         "AquiferResource": {
             "type": "object",
@@ -18,7 +18,10 @@
                     "additionalProperties": {
                         "$ref": "#/definitions/ArticleMetadatum"
                     }
-                }
+                },
+				"alignment_metadata": {
+                    "$ref": "#/definitions/AlignmentMetadata"
+				}
             },
             "required": [
                 "article_metadata",
@@ -83,7 +86,7 @@
             "properties": {
                 "version": {
                     "type": "string",
-                    "enum": ["1.0.0", "1.0.1", "1.0.2"]
+                    "enum": ["1.0.0", "1.0.1", "1.0.2", "1.1.0"]
                 },
                 "aquifer_type": {
                     "type": "string",
@@ -582,6 +585,47 @@
                 "name"
             ],
             "title": "Flavor"
-        }
+        },
+		"AlignmentMetadata": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "alignment_source": {
+                    "type": "string"
+                },
+				"alignment_ot_basis": {
+					"type": "string",
+					"enum": ["WLCM", "WLC"]
+				},
+				"alignment_nt_basis": {
+					"type": "string",
+					"enum": ["SBLGNT", "GNTB"]
+				},
+                "licenses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/LicenseInfoLicense"
+                    }
+                },
+				"target_token_differences": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/TargetTokenDifference"
+					}
+				}
+			}
+		},
+		"TargetTokenDifference": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+				"Clear-Bible": {
+					"type": "string"
+				},
+				"Aquifer": {
+					"type": "string"
+				}
+			}
+		}
     }
 }
