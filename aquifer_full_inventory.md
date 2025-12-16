@@ -1,6 +1,6 @@
 # Aquifer Resource Inventory
 
-Date Accessed: 2025-10-23
+Date Accessed: 2025-12-16
 
 ## Non-Bible Resources
 
@@ -16,15 +16,15 @@ Date Accessed: 2025-10-23
 
 | Language | Language Code | Localized Title | Article Count (% Compl.) |
 |----------|---------------|-----------------|--------------------------|
-| English | eng | Bible Dictionary (Tyndale) | 6023 (100%) |
-| Arabic | arb | قاموس الكتاب المقدس (تينديل) | 5656 (93%) |
-| French | fra | Dictionnaire biblique (Tyndale) | 1249 (20%) |
-| Hindi | hin | बाइबल कोश (टिंडेल) | 5762 (95%) |
+| English | eng | Bible Dictionary (Tyndale) | 6103 (100%) |
+| Arabic | arb | قاموس الكتاب المقدس (تينديل) | 5656 (92%) |
+| French | fra | Dictionnaire biblique (Tyndale) | 2280 (37%) |
+| Hindi | hin | बाइबल कोश (टिंडेल) | 5762 (94%) |
 | Indonesian | ind | Kamus Alkitab (Tyndale) | 119 (1%) |
-| Portuguese / Brasileiro - Brazilian | por | Dicionário Bíblico (Tyndale) | 2129 (35%) |
-| Spanish | spa | Diccionario bíblico (Tyndale) | 789 (13%) |
-| Swahili | swh | Kamusi ya Biblia (Tyndale) | 466 (7%) |
-| Traditional Chinese | zht | 聖經詞典 (Tyndale) | 367 (6%) |
+| Portuguese / Brasileiro - Brazilian | por | Dicionário Bíblico (Tyndale) | 5580 (91%) |
+| Spanish | spa | Diccionario bíblico (Tyndale) | 1608 (26%) |
+| Swahili | swh | Kamusi ya Biblia (Tyndale) | 592 (9%) |
+| Traditional Chinese | zht | 聖經詞典 (Tyndale) | 375 (6%) |
 
 #### Key Terms (Biblica) (`BiblicaStudyNotesKeyTerms`)
 
@@ -69,9 +69,10 @@ Date Accessed: 2025-10-23
 | Spanish | spa | Historias Bíblicas Abiertas (unfoldingWord) | 50 (100%) |
 | Swahili | swh | Hadithi za Biblia Wazi (unfoldingWord) | 50 (100%) |
 | Simplified Chinese | zhs | 开放圣经故事 (unfoldingWord) | 50 (100%) |
+| Traditional Chinese | zht | 開放聖經故事 (unfoldingWord) | 50 (100%) |
 | Nepali | nep | Open Bible Stories (unfoldingWord) | 50 (100%) |
 
-#### Key Terms (SRV) (`FIAKeyTerms`)
+#### Key Terms (FIA) (`FIAKeyTerms`)
 
 * **Citation:** _Familiarization, Internalization, Articulation (Fia) Terms_. SRV Partners, 2023
 * **Copyright:** 2023, [SRV Partners](https://srvpartners.org/home/)
@@ -81,7 +82,8 @@ Date Accessed: 2025-10-23
 
 | Language | Language Code | Localized Title | Article Count (% Compl.) |
 |----------|---------------|-----------------|--------------------------|
-| English | eng | Key Terms (SRV) | 416 (100%) |
+| English | eng | Key Terms (FIA) | 416 (100%) |
+| Spanish | spa | Términos Clave (SRV) | 20 (4%) |
 
 ### Images
 
@@ -114,7 +116,7 @@ Date Accessed: 2025-10-23
 | Simplified Chinese | zhs | 图片 (UBS) | 885 (83%) |
 | Traditional Chinese | zht | 圖片 (UBS) | 885 (83%) |
 
-#### Images (SRV) (`FIAImages`)
+#### Images (FIA) (`FIAImages`)
 
 * **Citation:** _Familiarization, Internalization, Articulation (Fia) Images_. SRV Partners, 2023
 * **Copyright:** 2023, [SRV Partners](https://srvpartners.org/home/)
@@ -124,19 +126,19 @@ Date Accessed: 2025-10-23
 
 | Language | Language Code | Localized Title | Article Count (% Compl.) |
 |----------|---------------|-----------------|--------------------------|
-| English | eng | Images (SRV) | 793 (100%) |
+| English | eng | Images (FIA) | 793 (100%) |
 
-#### Maps (SRV) (`FIAMaps`)
+#### Maps (FIA) (`FIAMaps`)
 
-* **Citation:** _Familiarization, Internalization, Articulation (Fia) Maps_. SRV Partners, 2023
-* **Copyright:** 2023, [SRV Partners](https://srvpartners.org/home/)
+* **Citation:** _Familiarization, Internalization, Articulation (Fia) Maps_. Biblica Inc., 2023
+* **Copyright:** 2023, [Biblica Inc.](https://www.biblica.com/)
 * **License:** [CC BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/legalcode.en)
 
 ##### Localizations
 
 | Language | Language Code | Localized Title | Article Count (% Compl.) |
 |----------|---------------|-----------------|--------------------------|
-| English | eng | Maps (SRV) | 76 (100%) |
+| English | eng | Maps (FIA) | 76 (100%) |
 
 ### Study Notes
 
@@ -150,15 +152,15 @@ Date Accessed: 2025-10-23
 
 | Language | Language Code | Localized Title | Article Count (% Compl.) |
 |----------|---------------|-----------------|--------------------------|
-| English | eng | Study Notes (Tyndale) | 16923 (100%) |
+| English | eng | Study Notes (Tyndale) | 16922 (100%) |
 | Arabic | arb | ملاحظات الدراسة (تينديل) | 16923 (100%) |
 | French | fra | Notes d'étude (Tyndale) | 16914 (99%) |
 | Hindi | hin | अध्ययन नोट्स (टिंडेल) | 16923 (100%) |
-| Indonesian | ind | Catatan Studi (Tyndale) | 8427 (49%) |
+| Indonesian | ind | Catatan Studi (Tyndale) | 11502 (67%) |
 | Portuguese / Brasileiro - Brazilian | por | Notas de Estudo (Tyndale) | 16921 (99%) |
-| Russian | rus | Заметки к учебнику (Тиндейл) | 6452 (38%) |
+| Russian | rus | Заметки к учебнику (Тиндейл) | 8680 (51%) |
 | Spanish | spa | Notas de Estudio (Tyndale) | 12615 (74%) |
-| Swahili | swh | Maelezo ya Masomo (Tyndale) | 4005 (23%) |
+| Swahili | swh | Maelezo ya Masomo (Tyndale) | 4826 (28%) |
 | Traditional Chinese | zht | 研讀筆記 (Tyndale) | 16923 (100%) |
 
 #### Study Notes (Biblica) (`BiblicaStudyNotes`)
@@ -198,9 +200,9 @@ Date Accessed: 2025-10-23
 | Arabic | arb | ملاحظات الدراسة - مقدمات الكتب (تينديل) | 66 (100%) |
 | French | fra | Notes d'étude - Introductions aux livres (Tyndale) | 66 (100%) |
 | Hindi | hin | अध्ययन नोट्स - पुस्तक परिचय (टिंडेल) | 66 (100%) |
-| Indonesian | ind | Catatan Studi - Pengantar Buku (Tyndale) | 19 (28%) |
+| Indonesian | ind | Catatan Studi - Pengantar Buku (Tyndale) | 20 (30%) |
 | Portuguese / Brasileiro - Brazilian | por | Notas de Estudo - Introduções aos Livros (Tyndale) | 66 (100%) |
-| Russian | rus | Заметки к учебнику - Вступления к книгам (Тиндейл) | 19 (28%) |
+| Russian | rus | Заметки к учебнику - Вступления к книгам (Тиндейл) | 37 (56%) |
 | Spanish | spa | Notas de Estudio - Introducciones a los Libros (Tyndale) | 66 (100%) |
 | Swahili | swh | Maelezo ya Masomo - Machapisho ya Vitabu (Tyndale) | 66 (100%) |
 | Traditional Chinese | zht | 研讀筆記 - 書籍簡介 (Tyndale) | 66 (100%) |
@@ -286,7 +288,7 @@ Date Accessed: 2025-10-23
 
 ### Translation Guides
 
-#### Translation Guide (SRV) (`CBBTER`)
+#### Translation Guide (FIA) (`CBBTER`)
 
 * **Citation:** _Familiarization, Internalization, Articulation (Fia)_. SRV Partners, 2023
 * **Copyright:** 2023, [SRV Partners](https://srvpartners.org/home/)
@@ -296,14 +298,14 @@ Date Accessed: 2025-10-23
 
 | Language | Language Code | Localized Title | Article Count (% Compl.) |
 |----------|---------------|-----------------|--------------------------|
-| English | eng | Translation Guide (SRV) | 1495 (100%) |
+| English | eng | Translation Guide (FIA) | 1495 (100%) |
 | Tok Pisin | tpi | Gaid bilong translēs (SRV) | 100 (6%) |
 | French | fra | Guide de traduction (SRV) | 178 (11%) |
 | Hindi | hin | अनुवाद गाइड (एसआरवी) | 92 (6%) |
 | Indonesian | ind | Panduan Penerjemahan (SRV) | 59 (3%) |
 | Portuguese / Brasileiro - Brazilian | por | Guia de Tradução (SRV) | 121 (8%) |
 | Russian | rus | Руководство по переводу (SRV) | 116 (7%) |
-| Spanish | spa | Guía de traducción (SRV) | 62 (4%) |
+| Spanish | spa | Guía de traducción (SRV) | 64 (4%) |
 | Swahili | swh | Mwongozo wa Tafsiri (SRV) | 60 (4%) |
 | Simplified Chinese | zhs | 翻译指南 (SRV) | 118 (7%) |
 
@@ -337,13 +339,13 @@ Date Accessed: 2025-10-23
 
 | Language | Language Code | Localized Title | Article Count (% Compl.) |
 |----------|---------------|-----------------|--------------------------|
-| English | eng | Translation Manual (unfoldingWord) | 241 (100%) |
+| English | eng | Translation Manual (unfoldingWord) | 239 (100%) |
 | Arabic | arb | كتيب الترجمة (كلمة متكشفة) | 241 (100%) |
-| Hindi | hin | अनुवाद मैनुअल (अनफोल्डिंग वर्ड) | 260 (107%) |
-| Indonesian | ind | Manual Terjemahan (unfoldingWord) | 146 (60%) |
+| Hindi | hin | अनुवाद मैनुअल (अनफोल्डिंग वर्ड) | 260 (108%) |
+| Indonesian | ind | Manual Terjemahan (unfoldingWord) | 146 (61%) |
 | Portuguese / Brasileiro - Brazilian | por | Manual de Tradução (unfoldingWord) | 241 (100%) |
 | Spanish | spa | Manual de Traducción (unfoldingWord) | 234 (97%) |
-| Traditional Chinese | zht | 翻譯手冊 (unfoldingWord) | 14 (5%) |
+| Traditional Chinese | zht | 翻譯手冊 (unfoldingWord) | 135 (56%) |
 | Nepali | nep | Translation Manual (unfoldingWord) | 229 (95%) |
 
 #### Translation Notes (unfoldingWord) (`UWTranslationNotes`)
@@ -356,14 +358,14 @@ Date Accessed: 2025-10-23
 
 | Language | Language Code | Localized Title | Article Count (% Compl.) |
 |----------|---------------|-----------------|--------------------------|
-| English | eng | Translation Notes (unfoldingWord) | 60966 (100%) |
+| English | eng | Translation Notes (unfoldingWord) | 60965 (100%) |
 | Arabic | arb | ملاحظات الترجمة (كلمة متكشفة) | 60943 (99%) |
-| French | fra | Notes de traduction (unfoldingWord) | 35310 (57%) |
+| French | fra | Notes de traduction (unfoldingWord) | 35487 (58%) |
 | Hindi | hin | अनुवाद नोट्स (अनफोल्डिंग वर्ड) | 62207 (102%) |
-| Indonesian | ind | Catatan Terjemahan (unfoldingWord) | 4251 (6%) |
-| Portuguese / Brasileiro - Brazilian | por | Notas de Tradução (unfoldingWord) | 49322 (80%) |
-| Spanish | spa | Notas de Traducción (unfoldingWord) | 59143 (97%) |
-| Traditional Chinese | zht | 翻譯筆記 (unfoldingWord) | 23362 (38%) |
+| Indonesian | ind | Catatan Terjemahan (unfoldingWord) | 6743 (11%) |
+| Portuguese / Brasileiro - Brazilian | por | Notas de Tradução (unfoldingWord) | 51383 (84%) |
+| Spanish | spa | Notas de Traducción (unfoldingWord) | 59445 (97%) |
+| Traditional Chinese | zht | 翻譯筆記 (unfoldingWord) | 25581 (41%) |
 
 #### Translation Questions (unfoldingWord) (`UWTranslationQuestions`)
 
@@ -378,7 +380,7 @@ Date Accessed: 2025-10-23
 | English | eng | Translation Questions (unfoldingWord) | 15210 (100%) |
 | Arabic | arb | أسئلة الترجمة (unfoldingWord) | 10632 (69%) |
 | French | fra | Questions de Traduction (unfoldingWord) | 9658 (63%) |
-| Hindi | hin | अनुवाद प्रश्न (unfoldingWord) | 13567 (89%) |
+| Hindi | hin | अनुवाद प्रश्न (unfoldingWord) | 15210 (100%) |
 | Indonesian | ind | Pertanyaan Terjemahan (unfoldingWord) | 370 (2%) |
 | Portuguese / Brasileiro - Brazilian | por | Perguntas de Tradução (unfoldingWord) | 8612 (56%) |
 | Traditional Chinese | zht | 翻譯問題 (unfoldingWord) | 15210 (100%) |
