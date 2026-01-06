@@ -1,6 +1,6 @@
 # Aquifer Resource Inventory
 
-Date Accessed: 2025-12-16
+Date Accessed: 2026-01-06
 
 ## Non-Bible Resources
 
@@ -18,13 +18,13 @@ Date Accessed: 2025-12-16
 |----------|---------------|-----------------|--------------------------|
 | English | eng | Bible Dictionary (Tyndale) | 6103 (100%) |
 | Arabic | arb | قاموس الكتاب المقدس (تينديل) | 5656 (92%) |
-| French | fra | Dictionnaire biblique (Tyndale) | 2280 (37%) |
+| French | fra | Dictionnaire biblique (Tyndale) | 2713 (44%) |
 | Hindi | hin | बाइबल कोश (टिंडेल) | 5762 (94%) |
 | Indonesian | ind | Kamus Alkitab (Tyndale) | 119 (1%) |
 | Portuguese / Brasileiro - Brazilian | por | Dicionário Bíblico (Tyndale) | 5580 (91%) |
-| Spanish | spa | Diccionario bíblico (Tyndale) | 1608 (26%) |
-| Swahili | swh | Kamusi ya Biblia (Tyndale) | 592 (9%) |
-| Traditional Chinese | zht | 聖經詞典 (Tyndale) | 375 (6%) |
+| Spanish | spa | Diccionario bíblico (Tyndale) | 1804 (29%) |
+| Swahili | swh | Kamusi ya Biblia (Tyndale) | 718 (11%) |
+| Traditional Chinese | zht | 聖經詞典 (Tyndale) | 397 (6%) |
 
 #### Key Terms (Biblica) (`BiblicaStudyNotesKeyTerms`)
 
@@ -156,7 +156,7 @@ Date Accessed: 2025-12-16
 | Arabic | arb | ملاحظات الدراسة (تينديل) | 16923 (100%) |
 | French | fra | Notes d'étude (Tyndale) | 16914 (99%) |
 | Hindi | hin | अध्ययन नोट्स (टिंडेल) | 16923 (100%) |
-| Indonesian | ind | Catatan Studi (Tyndale) | 11502 (67%) |
+| Indonesian | ind | Catatan Studi (Tyndale) | 11511 (68%) |
 | Portuguese / Brasileiro - Brazilian | por | Notas de Estudo (Tyndale) | 16921 (99%) |
 | Russian | rus | Заметки к учебнику (Тиндейл) | 8680 (51%) |
 | Spanish | spa | Notas de Estudio (Tyndale) | 12615 (74%) |
@@ -345,7 +345,7 @@ Date Accessed: 2025-12-16
 | Indonesian | ind | Manual Terjemahan (unfoldingWord) | 146 (61%) |
 | Portuguese / Brasileiro - Brazilian | por | Manual de Tradução (unfoldingWord) | 241 (100%) |
 | Spanish | spa | Manual de Traducción (unfoldingWord) | 234 (97%) |
-| Traditional Chinese | zht | 翻譯手冊 (unfoldingWord) | 135 (56%) |
+| Traditional Chinese | zht | 翻譯手冊 (unfoldingWord) | 136 (56%) |
 | Nepali | nep | Translation Manual (unfoldingWord) | 229 (95%) |
 
 #### Translation Notes (unfoldingWord) (`UWTranslationNotes`)
@@ -358,14 +358,14 @@ Date Accessed: 2025-12-16
 
 | Language | Language Code | Localized Title | Article Count (% Compl.) |
 |----------|---------------|-----------------|--------------------------|
-| English | eng | Translation Notes (unfoldingWord) | 60965 (100%) |
-| Arabic | arb | ملاحظات الترجمة (كلمة متكشفة) | 60943 (99%) |
-| French | fra | Notes de traduction (unfoldingWord) | 35487 (58%) |
-| Hindi | hin | अनुवाद नोट्स (अनफोल्डिंग वर्ड) | 62207 (102%) |
-| Indonesian | ind | Catatan Terjemahan (unfoldingWord) | 6743 (11%) |
-| Portuguese / Brasileiro - Brazilian | por | Notas de Tradução (unfoldingWord) | 51383 (84%) |
-| Spanish | spa | Notas de Traducción (unfoldingWord) | 59445 (97%) |
-| Traditional Chinese | zht | 翻譯筆記 (unfoldingWord) | 25581 (41%) |
+| English | eng | Translation Notes (unfoldingWord) | 70219 (100%) |
+| Arabic | arb | ملاحظات الترجمة (كلمة متكشفة) | 60943 (86%) |
+| French | fra | Notes de traduction (unfoldingWord) | 35660 (50%) |
+| Hindi | hin | अनुवाद नोट्स (अनफोल्डिंग वर्ड) | 62207 (88%) |
+| Indonesian | ind | Catatan Terjemahan (unfoldingWord) | 7582 (10%) |
+| Portuguese / Brasileiro - Brazilian | por | Notas de Tradução (unfoldingWord) | 56638 (80%) |
+| Spanish | spa | Notas de Traducción (unfoldingWord) | 59783 (85%) |
+| Traditional Chinese | zht | 翻譯筆記 (unfoldingWord) | 25848 (36%) |
 
 #### Translation Questions (unfoldingWord) (`UWTranslationQuestions`)
 
