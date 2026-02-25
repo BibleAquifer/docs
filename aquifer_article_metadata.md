@@ -3,6 +3,8 @@
 * **Author:** Rick Brannan (`rickb@missionmutual.org`)
 * **Date:** 2025-10-16 (`1.0.0`)
 * **Updated:** 2025-11-14 (`1.0.1`). Added `review_level` to schema.
+* **Updated:** 2026-01-14 (`1.0.2`). `reference_id` and `associations` no longer required.
+* **Updated:** 2026-02-25 (`1.0.3`). Added `acai` to `associations`.
 
 # Introduction
 
@@ -31,7 +33,7 @@ For canonically-ordered resources, each content file represents the material of 
 
 For other resources (alphabetially ordered and monograph resources), each file, while still a list of articles, only contains information for one article. The files are named like `NNNNNN.content.(json|md)` If the files are sorted in an ascending order, the content of the resource will be in the proper order.
 
-* `version`: The version of the JSON schema `aquifer_article.schema.json` (located in `/schemas`) the metadata has been validated against. This is currently set at `1.0.1`. 
+* `version`: The version of the JSON schema `aquifer_article.schema.json` (located in `/schemas`) the metadata has been validated against. This is currently set at `1.0.3`.
 * `content_id`: The `content_id`
 * `reference_id`: If the `content_id` is used in a reference in the aquifer, it may use the `reference_id` for navigation.
 * `index_reference`: The article sort key, essentially. For canonically-ordered resources, it is an eight-digit string representing the book, chapter, and verse of the Bible reference (`BBCCCVVV`). It may also indicate a range, with two references (`BBCCCVVV`–`BBCCCVVV`). For alphabetically-ordered resources, it is the sort key used (lower-cased article title, typically).
@@ -56,4 +58,14 @@ For other resources (alphabetially ordered and monograph resources), each file, 
 	* `content_id`: The identifier of the article in the target resource.
 	* `label`: A string representing a label for the article. If something clickable is needed for the link, this label can be used as the clickable content.
 	* `language`: ISO three-letter code representing the language. This, plus the `resource_code` allow the destination to be easily specified in a manner consistent with how the material is laid out in the github repositories.
-	* `resource_code`: The `resource_code` uniquely identifies the resource and is also the repository name for the resource in github. 
+	* `resource_code`: The `resource_code` uniquely identifies the resource and is also the repository name for the resource in github.
+  * `acai`: Optional. Each item in the `acai` list represents an association between this article and an entity in the [ACAI](https://github.com/BibleAquifer/ACAI) dataset. ACAI annotates explicit occurrences of named entities (people, places, groups, deities, flora, fauna, realia, and keyterms) in the Hebrew OT and Greek NT. Each item has five fields:
+    * `id`: The ACAI entity identifier, combining entity type and name (e.g. `person:Aaron`, `place:Egypt`, `keyterm:Propitiation`).
+    * `type`: The ACAI entity type. One of: `person`, `place`, `group`, `deity`, `flora`, `fauna`, `realia`, `keyterm`.
+    * `preferred_label`: The preferred label for the entity in the language of the resource, falling back to the English label when no localized label is available.
+    * `confidence`: A float between `0.0` and `1.0` indicating match confidence. A value of `1.0` indicates a direct link recorded in the ACAI data.
+    * `match_method`: How the association was established. One of:
+      * `content_id`: A direct link between this article's `content_id` and the ACAI entity was found in the ACAI data. Confidence is always `1.0`.
+      * `canonical`: For canonically-ordered resources, the entity's explicit attestations overlap with the article's scripture reference range (`index_reference`). Scored by key-reference hit, occurrence count, and specificity.
+      * `scored`: For alphabetically-ordered resources, a weighted combination of label similarity (fuzzy match of article title against entity labels) and passage reference overlap.
+      * `embedding`: Fallback for alphabetically-ordered resources when no scored matches meet the threshold. Uses multilingual sentence-embedding cosine similarity (LaBSE model) between the article title and entity labels.

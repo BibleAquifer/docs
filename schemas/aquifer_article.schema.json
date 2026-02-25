@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-06/schema#",
-    "$schemaVersion": "1.0.1",
+    "$schemaVersion": "1.0.3",
     "type": "array",
     "items": {
         "$ref": "#/definitions/AquiferArticle"
@@ -12,10 +12,10 @@
             "properties": {
                 "version": {
                     "type": "string",
-                    "enum": ["1.0.0", "1.0.1"]
+                    "enum": ["1.0.0", "1.0.1", "1.0.2", "1.0.3", "1.1.2"]
                 },
                 "content_id": {
-                    "type": "integer"
+                    "type": ["string","integer"]
                 },
                 "reference_id": {
                     "type": "integer"
@@ -50,7 +50,6 @@
                 "index_reference",
                 "language",
                 "media_type",
-                "reference_id",
                 "title"
             ],
             "title": "AquiferArticle"
@@ -70,6 +69,12 @@
                     "items": {
                         "$ref": "#/definitions/Resource"
                     }
+                },
+                "acai": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AcaiMatch"
+                    }
                 }
             },
             "required": [
@@ -77,6 +82,38 @@
                 "resource"
             ],
             "title": "Associations"
+        },
+        "AcaiMatch": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "preferred_label": {
+                    "type": "string"
+                },
+                "confidence": {
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 1.0
+                },
+                "match_method": {
+                    "type": "string",
+                    "enum": ["content_id", "scored", "canonical", "embedding"]
+                }
+            },
+            "required": [
+                "id",
+                "type",
+                "preferred_label",
+                "confidence",
+                "match_method"
+            ],
+            "title": "AcaiMatch"
         },
         "Passage": {
             "type": "object",
@@ -113,7 +150,7 @@
                     "type": "integer"
                 },
                 "content_id": {
-                    "type": "integer"
+                    "type": ["string","integer"]
                 },
                 "resource_code": {
                     "type": "string"
