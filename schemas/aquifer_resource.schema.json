@@ -35,7 +35,7 @@
             "additionalProperties": false,
             "properties": {
                 "content_id": {
-                    "type": "integer"
+                    "type": ["string","integer"]
                 },
                 "reference_id": {
                     "type": "integer"
@@ -63,7 +63,7 @@
             "additionalProperties": false,
             "properties": {
                 "content_id": {
-                    "type": "integer"
+                    "type": ["string","integer"]
                 },
                 "language": {
                     "type": "string",
@@ -462,7 +462,7 @@
             "properties": {
               "mimeType": {
                 "type": "string",
-                "enum": ["text/json", "text/markdown", "application/pdf", "application/docx", "application/xml", "text/plain"]
+                "enum": ["text/json", "text/markdown", "application/pdf", "application/docx", "application/xml", "text/plain", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"]
               },
               "size": {
                 "type": "integer"

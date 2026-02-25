@@ -6,7 +6,6 @@
 * **Updated:** 2025-11-21 (`1.0.2`). Introduce value `Bible` for `aquifer_type`, `resource_type`, and `content_type`.
 * **Updated:** 2025-12-11 (`1.1.0`). Add `alignment_metadata` section.
 
-
 # Introduction
 
 [an introduction to appear here some time in the future]
