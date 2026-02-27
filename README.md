@@ -9,8 +9,8 @@ Documentation for JSON schemas and other material
 
 ## JSON schemas
 
-* `schemas/aquifer_resource.schema.json`: Currently version `1.0.2`. The resource metadata JSON file `metadata.json` should conform to the current version of this schema.
-* `schemas/aquifer_article.schema.json`: Currently version `1.0.1`. The content JSON files (e.g. `01.content.json` for canonically-ordered resources, `001.content.json` for alphabetically-ordered resources, and `000001.content.json` for others) should conform to the current version of this schema.
+* `schemas/aquifer_resource.schema.json`: Currently version `1.1.2`. The resource metadata JSON file `metadata.json` should conform to the current version of this schema.
+* `schemas/aquifer_article.schema.json`: Currently version `1.0.3`. The content JSON files (e.g. `01.content.json` for canonically-ordered resources, `001.content.json` for alphabetically-ordered resources, and `000001.content.json` for others) should conform to the current version of this schema.
 
 ## Forthcoming
 
@@ -19,7 +19,6 @@ This list is not in any particular order and order does not imply priority of it
 * Aquifer Linking Specification / Documentation
   * specifying Bible references
   * specifying links to other Aquifer resources
-  * specifying [ACAI](https://github.com/BibleAquifer/ACAI) links
 * Aquifer Resource Registry
 * Images, Audio, and other media
   * currently only have (usable, valid) links to the media item
