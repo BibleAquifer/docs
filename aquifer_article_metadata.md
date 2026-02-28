@@ -6,6 +6,7 @@
 * **Updated:** 2026-01-14 (`1.0.2`). `reference_id` and `associations` no longer required.
 * **Updated:** 2026-02-25 (`1.0.3`). Added `acai` to `associations`.
 * **Updated:** 2026-02-27. Revised `canonical` ACAI scoring formula; updated embedding model reference.
+* **Updated:** 2026-02-27. Refined `scored` and `embedding` matching for alphabetical/monograph resources.
 
 # Introduction
 
@@ -68,5 +69,5 @@ For other resources (alphabetially ordered and monograph resources), each file, 
     * `match_method`: How the association was established. One of:
       * `content_id`: A direct link between this article's `content_id` and the ACAI entity was found in the ACAI data. Confidence is always `1.0`.
       * `canonical`: For canonically-ordered resources, the entity has at least one explicit attestation within the article's scripture reference range (`index_reference`). All such entities are included; confidence reflects their prominence in the passage using a weighted combination of: **concentration** (fraction of passage verses containing the entity), **occurrence count** (normalised), **key-reference density** (how many of the entity's key references fall within the range, relative to range size), and **entity type** (deity/person/group/place/keyterm weighted higher than flora/fauna/realia). Confidence is used for ranking only — there is no minimum threshold.
-      * `scored`: For alphabetically-ordered resources, a weighted combination of label similarity (fuzzy match of article title against entity labels) and passage reference overlap.
-      * `embedding`: Fallback for alphabetically-ordered resources when no scored matches meet the threshold. Uses multilingual sentence-embedding cosine similarity between the article title and entity labels.
+      * `scored`: For alphabetically-ordered and monograph resources, a weighted combination of label similarity and passage reference overlap. Label matching is sensitive to title length: single-token titles (proper names) use strict edit-distance similarity with a high minimum threshold to prevent co-occurring similarly-spelled names (e.g. "Bigtha" and "Biztha") from matching; multi-token titles use token-sorted fuzzy matching with a lower threshold to accommodate word-order variation in phrase titles.
+      * `embedding`: Fallback for alphabetically-ordered resources when no scored matches meet the threshold. Uses multilingual sentence-embedding cosine similarity between the article title and entity labels. Only attempted for titles of 4 or more characters; scores are adjusted by a length ratio penalty to prevent short titles from spuriously matching longer entity labels that share subword tokens.
