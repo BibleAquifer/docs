@@ -199,6 +199,10 @@
                 },
                 "holder": {
                     "$ref": "#/definitions/Holder"
+                },
+                "statement": {
+                    "type": "string",
+                    "description": "Optional copyright/license statement provided by the content owner. When present, used directly in rendered outputs in place of a generated statement."
                 }
             },
             "required": [
