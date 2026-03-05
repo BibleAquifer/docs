@@ -78,7 +78,7 @@ For other resources (alphabetially ordered and monograph resources), each file, 
 The `metadata.json` file accompanying each resource's converted output contains a `resource_metadata` section with the following notable fields:
 
 * `license_info`: License and copyright information for the resource. Contains the standard Aquifer license fields (`title`, `copyright`, `licenses`). May also contain:
-  * `statement` *(optional)*: A specific copyright/license statement provided by the content owner. When present, downstream renderers (markdown, PDF title page) use this statement directly instead of constructing a generic "is based on and adapted from" sentence.
+  * `copyright.statement` *(optional)*: A specific copyright/license statement provided by the content owner. When present, downstream renderers (markdown, PDF title page) use this statement directly instead of constructing a generic "is based on and adapted from" sentence.
 
 # Image Article Content Fields
 
