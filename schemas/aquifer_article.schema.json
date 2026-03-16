@@ -18,7 +18,7 @@
                     "type": ["string","integer"]
                 },
                 "reference_id": {
-                    "type": "integer"
+                    "type": ["string","integer"]
                 },
                 "title": {
                     "type": "string"
@@ -147,7 +147,7 @@
             "additionalProperties": false,
             "properties": {
                 "reference_id": {
-                    "type": "integer"
+                    "type": ["string","integer"]
                 },
                 "content_id": {
                     "type": ["string","integer"]
@@ -166,7 +166,6 @@
                 "content_id",
                 "label",
                 "language",
-                "reference_id",
                 "resource_code"
             ],
             "title": "Resource"

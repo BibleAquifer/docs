@@ -86,7 +86,7 @@
             "properties": {
                 "version": {
                     "type": "string",
-                    "enum": ["1.0.0", "1.0.1", "1.0.2", "1.1.0"]
+                    "enum": ["1.0.0", "1.0.1", "1.0.2", "1.1.0", "1.1.2"]
                 },
                 "aquifer_type": {
                     "type": "string",
@@ -94,7 +94,7 @@
                 },
                 "resource_type": {
                     "type": "string",
-                    "enum": ["Bible","Translation Glossary", "Comprehension Testing", "Translation Guide", "Foundational Bible Stories","Images, Maps, Videos","Study Notes","Bible Dictionary","Bible Translation Manual"]
+                    "enum": ["Bible","Translation Glossary", "Comprehension Testing", "Translation Guide", "Foundational Bible Stories","Images, Maps, Videos","Study Notes","Bible Dictionary","Thematic Dictionary","Bible Translation Manual"]
                 },
                 "title": {
                     "type": "string"
