@@ -87,15 +87,15 @@ The following is from the Berean Standard Bible's `40.alignments.json` file, whi
 In this representation, the first "document" in the list represents the alignment "Source" (here the SBLGNT), the second 
 represents the "Target" (here the BSB or Berean Standard Bible). Each document also specifies a `scheme` it uses to represent units. 
 
+The SBLGNT uses a `BCVWP|token-string` scheme. In this alignment, a source unit is specified by a `BCVWP` (testament-Book-Chapter-Verse-Word-Part) string; so `n40001001001` for the first word token found in Matthew 1:1 (book 40, chapter 1, verse 1, word 1). The pipe (`|`) is simply a delimiter, and the `token-string` is the actual word from the edition (here `Βίβλος`). The combined token representing the first word of Matthew 1:1 in the SBLGNT is `n40001001001|Βίβλος`.
+
+The BSB uses a `BCVW|token-string` scheme. In this alignment, a target unit is specified by a `BCVW` (Book-Chapter-Verse-Word) scheme. So `40001001001` represents Matthew 1:1, word 1, or "This". The combined token would be `40001001001|This`. 
+
 ### `records`
 
 A **record** is essentially a list of **alignment units**.
 
 An **alignment unit** associates a set of **Source** token identifiers with set of **Target** token identifiers.
-
-The SBLGNT uses a `BCVWP|token-string` scheme. In this alignment, a source unit is specified by a `BCVWP` (testament-Book-Chapter-Verse-Word-Part) string; so `n40001001001` for the first word token found in Matthew 1:1 (book 40, chapter 1, verse 1, word 1). The pipe (`|`) is simply a delimiter, and the `token-string` is the actual word from the edition (here `Βίβλος`). The combined token representing the first word of Matthew 1:1 in the SBLGNT is `n40001001001|Βίβλος`.
-
-The BSB uses a `BCVW|token-string` scheme. In this alignment, a target unit is specified by a `BCVW` (Book-Chapter-Verse-Word) scheme. So `40001001001` represents Matthew 1:1, word 1, or "This". The combined token would be `40001001001|This`. 
 
 Because alignments support a many-to-many relationship, we align a list or set of source token identifiers with a list or set of target token identifiers. An example is below.
 
