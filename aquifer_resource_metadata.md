@@ -27,11 +27,14 @@ This document uses vocabulary with specific meaning in the context of the Aquife
 
 # JSON
 
-The JSON has three top-level sections:
+The JSON has three required top-level sections:
 
 * `resource_metadata`: Information about the resource itself. Titles, licensing information, localization information, etc.
 * `scripture_burrito`: Resource metadata reformulated (and expanded where necessary) to be _mostly_ compliant with the [Scripture Burrito metadata specification](https://burrito.bible). 
 * `article_metadata`: Information about each article (identifiers and sorting information) as well as localization information. The localization information includes identifiers of translations of the article in other languages. At present (2025-11-21) Bibles have no `article_metadata` as Bibles are provided as both USFM and USX, with supplementary audio information if available.
+
+Some resources (e.g. Bibles with textual alignment data) contain an optional top-level section:
+
 * `alignment_metadata`: Optional information about Bible alignments available in a resource of `type` Bible.
 
 ## `resource_metadata`
@@ -48,6 +51,7 @@ The `resource_metadata` is a dictionary that contains a large amount of resource
 * `resource_type`: A string identifier providing the **Resource Type**. These identifiers are based on material from the [Strategic Languages Initiative](https://etenlab.notion.site/SLI-Resource-Types-00c9e1ce6d6c426b982e57819c045538). The following string identifiers are currently used and supported:
   * `Bible`
   * `Bible Dictionary`
+  * `Thematic Dictionary`
   * `Comprehension Testing`
   * `Foundational Bible Stories`
   * `Images, Maps, Videos`
@@ -68,7 +72,7 @@ The `resource_metadata` is a dictionary that contains a large amount of resource
   * `showAdaptationNoticeForEnglish`: boolean. If `true`, then (hopefully) the `adaptation_notice` property has the necessary statement.
   * `showAdaptationNoticeForNonEnglish`: boolean. If `true`, then (hopefully) the `adaptation_notice` property has the necessary statement.
 * `adaptation_notice`: An HTML string (may be multiple paragraphs) with the adaptation notice.
-* `date_created`: A `YYYY-MM-DD` formatted string providing the date that the resource information was exported and rendered into JSON.
+* `date_created`: A `YYYY-MM-DD` formatted string providing the date that the resource information was exported and rendered into JSON or when it was last updated.
 * `language`: A three-letter code compatible with the ISO three-letter language codes.
 * `localizations`: A list of three-letter language codes representing the languages that have any amount of localization data available for the resource.
 * `order`: Provides the order of the resource. Three orders are supported:
@@ -142,7 +146,7 @@ There are eight top-level properties, each of which may have lists or dictionari
 
 The `article_metadata` consists of a list of keys to dictionaries that contain localization information about each article. The keys are resource article `content_id` values. They are also sorted in resource order, allowing reconstitution of the resource by article if necessary.
 
-At present, Bibles do not have any article metadata.
+At present, Bibles do not have any `article_metadata`.
 
 This information is useful to navigate across localized editions of resources. It is also appropriate to use to train translation models that rely on parallel data.
 

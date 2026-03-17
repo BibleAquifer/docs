@@ -6,6 +6,7 @@ Documentation for JSON schemas and other material
 
 * [Aquifer Resource Metadata](aquifer_resource_metadata.md): Information about the JSON used to encode resource-level metadata for Aquifer resources
 * [Aquifer Article Metadata](aquifer_article_metadata.md): Information about the JSON used to encode article-level metadata and content for Aquifer resources.
+* [Aquifer Alignments](aquifer_alignments.md): Information about alignment data and suggestions on how to apply the data to textual annotation and display. 
 
 ## JSON schemas
 

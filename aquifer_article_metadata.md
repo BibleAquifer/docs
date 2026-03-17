@@ -34,7 +34,9 @@ An aquifer content JSON file is a list of dictionaries, where each dictionary in
 
 For canonically-ordered resources, each content file represents the material of a book of the Bible. The files are named like `NN.content.(json|md)` where `NN` is the zero-padded Bible book number. So `01.content.json` is the data in JSON for Genesis, `40.content.md` is content for Matthew in Markdown, etc. 
 
-For other resources (alphabetially ordered and monograph resources), each file, while still a list of articles, only contains information for one article. The files are named like `NNNNNN.content.(json|md)` If the files are sorted in an ascending order, the content of the resource will be in the proper order.
+For alphabetically-ordered resources, each content file represents the material of an alphabetic letter or letter combination. The files are named like `NNN.content.(json|md)` where `NN` is zero-padded number representing the sort order of the language alphabetic (sort) order. So in English, `01.content.json` typically represents articles with an `index-reference` that begins with `a`. To determine letters and sort order we rely on ICU Collation as implemented by the `pyicu` Python library.
+
+For other resources (monograph resources), each file only contains information for one article. The files are named like `NNNNNN.content.(json|md)` If the files are sorted in an ascending order, the content of the resource will be in the proper order for the resource.
 
 * `version`: The version of the JSON schema `aquifer_article.schema.json` (located in `/schemas`) the metadata has been validated against. This is currently set at `1.0.3`.
 * `content_id`: The `content_id`
@@ -82,6 +84,6 @@ The `metadata.json` file accompanying each resource's converted output contains 
 
 # Image Article Content Fields
 
-Image articles (`media_type: "Image"`) are sourced from Aquifer API export files that may include the following optional field in the article's `content/content` object:
+Image articles (`media_type: "Image"`) may contain images sourced from Aquifer API export files that may include the following optional field in the article's `content/content` object:
 
 * `originalUrl` *(optional)*: A URL pointing to the original source of the image (e.g. the content owner's website or media library). When present, the render stage appends an `Original:` link after the standard download link in the article's HTML content.
