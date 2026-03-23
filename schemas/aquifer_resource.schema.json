@@ -38,7 +38,7 @@
                     "type": ["string","integer"]
                 },
                 "reference_id": {
-                    "type": "integer"
+                    "type": ["string", "integer"]
                 },
                 "index_reference": {
                     "type": "string"
