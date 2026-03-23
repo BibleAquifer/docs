@@ -94,7 +94,7 @@
                 },
                 "resource_type": {
                     "type": "string",
-                    "enum": ["Bible","Translation Glossary", "Comprehension Testing", "Translation Guide", "Foundational Bible Stories","Images, Maps, Videos","Study Notes","Bible Dictionary","Thematic Dictionary","Bible Translation Manual"]
+                    "enum": ["Bible", "Translation Glossary", "Comprehension Testing", "Translation Guide", "Foundational Bible Stories","Images, Maps, Videos","Study Notes","Bible Dictionary","Thematic Dictionary","Semantic Lexicon","Bible Translation Manual"]
                 },
                 "title": {
                     "type": "string"
