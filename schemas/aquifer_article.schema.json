@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-06/schema#",
-    "$schemaVersion": "1.0.3",
+    "$schemaVersion": "1.0.4",
     "type": "array",
     "items": {
         "$ref": "#/definitions/AquiferArticle"
@@ -12,13 +12,13 @@
             "properties": {
                 "version": {
                     "type": "string",
-                    "enum": ["1.0.0", "1.0.1", "1.0.2", "1.0.3", "1.1.2"]
+                    "enum": ["1.0.0", "1.0.1", "1.0.2", "1.0.3", "1.0.4", "1.1.2"]
                 },
                 "content_id": {
                     "type": ["string","integer"]
                 },
                 "reference_id": {
-                    "type": ["string","integer"]
+                    "type": ["string","integer","null"]
                 },
                 "title": {
                     "type": "string"
@@ -77,10 +77,6 @@
                     }
                 }
             },
-            "required": [
-                "passage",
-                "resource"
-            ],
             "title": "Associations"
         },
         "AcaiMatch": {
