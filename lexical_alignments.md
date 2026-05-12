@@ -1,38 +1,36 @@
 # Lexical Alignments
 
-Lexical alignments in the Aquifer map Greek and Hebrew words from the original biblical texts to entries in semantic dictionaries. This document describes the structure, format, and usage of lexical alignment data.
+Lexical alignments map individual words from the original biblical texts to entries in semantic dictionary resources. Each alignment record connects a source token from the Greek or Hebrew text to a specific dictionary article, enabling word-level semantic lookup, contextual dictionary navigation, and cross-referencing between biblical text and reference material.
 
-## Overview
+Lexical alignments are currently available for:
 
-Lexical alignments connect tokens from source biblical texts (SBLGNT for Greek, WLCM for Hebrew) to specific entries in target dictionary resources (UBS Dictionary of the Greek New Testament, UBS Hebrew Dictionary, and future resources). Unlike textual alignments which map between different Bible translations, lexical alignments support word-level semantic lookup, contextual dictionary navigation, and cross-referencing between texts and reference materials.
+| Resource | Source Text | Source `docid` | Target Scheme |
+|---|---|---|---|
+| UBS Dictionary of the Greek New Testament | SBLGNT | `SBLGNT` | `ubs-dgnt` |
+| UBS Hebrew Dictionary | WLCM | `WLC` | `ubs-dbh` |
 
-### When Lexical Alignments Are Available
+## File Organization
 
-Lexical alignments are available for:
-- **UBS Dictionary of the Greek New Testament** (NT only, aligned to SBLGNT)
-- **UBS Hebrew Dictionary** (OT only, aligned to WLCM)
-- Future dictionary resources as they are integrated into the Aquifer
-
-## Alignment JSON Structure
-
-Lexical alignment data is distributed as JSON files compliant with Scripture Burrito v0.4 alignment specification with Aquifer extensions. Each alignment file corresponds to a single biblical book.
-
-### File Organization
+Alignment files are located at `/{lang}/alignments/` within each dictionary repository. One file covers one biblical book; the filename number matches standard USFM book numbering (OT books 01–39, NT books 40–66).
 
 ```
-/{lang}/converted/alignments/
-├── 01.alignment.json  (Genesis)
-├── 02.alignment.json  (Exodus)
-├── ...
-├── 39.alignment.json  (Malachi)
-├── 40.alignment.json  (Matthew)
-├── ...
-└── 66.alignment.json  (Revelation)
+/{lang}/alignments/
+├── 01.alignment.json   (Genesis)
+├── 02.alignment.json   (Exodus)
+│   ...
+├── 39.alignment.json   (Malachi)
+├── 40.alignment.json   (Matthew)
+│   ...
+└── 66.alignment.json   (Revelation)
 ```
 
-Book numbers follow standard USFM numbering: OT books 01–39, NT books 40–66.
+Which books have alignment data is indicated in `/{lang}/metadata.json` under `scripture_burrito.ingredients` (see [Metadata](#metadata) below). Not all biblical books are necessarily covered for every dictionary.
 
-### Top-Level Structure
+## JSON Structure
+
+Files conform to the Scripture Burrito v0.4 alignment specification.
+
+### Top Level
 
 ```json
 {
@@ -42,13 +40,9 @@ Book numbers follow standard USFM numbering: OT books 01–39, NT books 40–66.
 }
 ```
 
-- **`format`**: Always `"alignment"` for Scripture Burrito compliance
-- **`version`**: Specification version; currently `"0.4"`
-- **`groups`**: Array of alignment groups (typically one per file)
+### Group
 
-### Groups
-
-Each group defines alignments of a specific type and includes metadata about the source and target documents.
+Each file contains one group.
 
 ```json
 {
@@ -57,387 +51,211 @@ Each group defines alignments of a specific type and includes metadata about the
     "creator": "convert-semantic-dictionaries",
     "created": "2026-05-12"
   },
-  "documents": [...],
+  "documents": [
+    { "scheme": "BCVW|token-string",  "docid": "SBLGNT" },
+    { "scheme": "ubs-dgnt",           "docid": "UBSGreekNTDictionary" }
+  ],
   "roles": ["source", "target"],
   "records": [...]
 }
 ```
 
-- **`type`**: `"source-word-to-lexicon"` for dictionary alignments
-- **`meta`**: Origin and creation date of the alignment data
-- **`documents`**: Array of source and target document definitions
-- **`roles`**: Always `["source", "target"]` — first document is source, second is target
-- **`records`**: Array of individual alignment units
+- **`type`**: Always `"source-word-to-lexicon"` for lexical alignments
+- **`documents[0]`**: The source (original language) text
+- **`documents[1]`**: The target (dictionary) resource
+- **`roles`**: First document is `"source"`, second is `"target"`
 
-### Documents
+### Records
 
-Documents define the token scheme and identifier for each text involved in the alignment.
-
-**Source Document (Original Language Text)**
+Each record aligns one or more source tokens to one or more dictionary entries.
 
 ```json
 {
-  "scheme": "BCVW|token-string",
-  "docid": "SBLGNT"
+  "references": [
+    ["40001001008|Ἀβραάμ"],
+    ["000011000000000"]
+  ]
 }
 ```
 
-- **`docid`**: `"SBLGNT"` for Greek texts, `"WLC"` for Hebrew texts
-- **`scheme`**: `"BCVW|token-string"` — Book-Chapter-Verse-Word format with the actual word form
-  - Structure: `BBCCCVVVWWW|word_form`
-  - Example: `40001001001|Βίβλος` = Matthew 1:1, word 1, the word "Βίβλος"
-  - Prefix conventions: none for NT (books 40–66), leading zeros for all positions
-  - For OT texts, `docid` would be `"WLC"` with the same scheme
+- **`references[0]`**: Array of source token identifiers (see [Source Token Format](#source-token-format))
+- **`references[1]`**: Array of target dictionary entry identifiers (see [Target Entry Identifiers](#target-entry-identifiers))
 
-**Target Document (Dictionary)**
+Most records have a single source token and a single target entry. Multiple source tokens occur when a Hebrew word is morphologically segmented into parts (see [Hebrew Morphological Parts](#hebrew-morphological-parts)).
+
+## Source Token Format
+
+Source tokens combine a positional identifier with the word form:
+
+```
+{token_id}|{word_form}
+```
+
+### Greek (SBLGNT)
+
+Scheme: `BCVW|token-string`
+
+Token IDs are 11 digits: `BBCCCVVVWWW`
+
+| Field | Digits | Description |
+|---|---|---|
+| BB | 2 | Book number (40–66 for NT) |
+| CCC | 3 | Chapter |
+| VVV | 3 | Verse |
+| WWW | 3 | Word position within verse |
+
+**Examples**
+
+- `40001001001|Βίβλος` — Matthew 1:1, word 1, "Βίβλος"
+- `43003016016|οὕτως` — John 3:16, word 16, "οὕτως"
+
+### Hebrew (WLCM)
+
+Scheme: `BCVWP|token-string`
+
+Token IDs are 12 digits: `BBCCCVVVWWWP`
+
+| Field | Digits | Description |
+|---|---|---|
+| BB | 2 | Book number (01–39 for OT) |
+| CCC | 3 | Chapter |
+| VVV | 3 | Verse |
+| WWW | 3 | Word position within verse |
+| P | 1 | Morphological part (1 or 2) |
+
+**Examples**
+
+- `010110290161|אֲבִי` — Genesis 11:29, word 16, part 1, "אֲבִי"
+- `010020240061|אָבִי` + `010020240062|ו` — Genesis 2:24, word 6, parts 1 and 2
+
+### Hebrew Morphological Parts
+
+The WLCM tokenization segments some Hebrew words into morphological constituents. For example, a prefixed conjunction (ו, "and") attached to a root is represented as two part tokens. When a single lexeme alignment spans multiple parts, all part tokens appear in `references[0]`:
 
 ```json
 {
-  "scheme": "ubs-dgnt",
-  "docid": "UBSGreekNTDictionary"
+  "references": [
+    [
+      "010020240061|אָבִי",
+      "010020240062|ו"
+    ],
+    ["000003000000000"]
+  ]
 }
 ```
 
-- **`docid`**: Dictionary resource identifier (e.g., `"UBSGreekNTDictionary"`, `"UBSHebrewDictionary"`)
-- **`scheme`**: Dictionary-specific token format (see sections below)
+Both tokens together represent one dictionary headword. The majority of Hebrew records involve a single part token; roughly 15% involve two parts.
 
-#### Target Schemes
+## Target Entry Identifiers
 
-**UBS Greek Dictionary (`ubs-dgnt`)**
-
-```
-000006000000000
-```
-
-This 15-digit identifier uniquely identifies a dictionary entry. The structure is:
-
-```
-[entry_id:9 digits][reserved:6 digits]
-```
-
-- **Entry ID**: A 9-digit zero-padded entry identifier within the dictionary
-- **Reserved**: Six trailing zeros; reserved for future use
-
-Example: `000006000000000` identifies dictionary entry #6 in the UBS Greek Dictionary.
-
-**UBS Hebrew Dictionary (`ubs-dhb`)**
+Target identifiers are 15-digit strings that uniquely identify a dictionary entry:
 
 ```
 000003000000000
 ```
 
-Similar 15-digit format with:
-- **Entry ID**: A 9-digit zero-padded entry identifier
-- **Reserved**: Six trailing zeros
+The first 9 digits are the zero-padded entry number; the trailing 6 digits are zeros reserved for future use. This full 15-digit string is used directly as the `content_id` for article lookup — no extraction is needed.
 
-To find the corresponding dictionary article, use the entry ID (first 9 digits, zero-padded) as the `content_id` in the dictionary resource's article metadata.
+The target scheme encodes which dictionary the entry belongs to:
 
-### Records
+| Dictionary | `docid` | `scheme` |
+|---|---|---|
+| UBS Greek NT Dictionary | `UBSGreekNTDictionary` | `ubs-dgnt` |
+| UBS Hebrew Dictionary | `UBSHebrewDictionary` | `ubs-dbh` |
 
-Records are the individual alignment units. Each record maps one or more source tokens to one or more target dictionary entries.
+## Looking Up Dictionary Articles
+
+The 15-digit target identifier is the `content_id` used throughout the dictionary resource. To retrieve the corresponding article:
+
+1. Take the target identifier from the alignment record (e.g., `"000003000000000"`)
+2. Look it up as a key in `article_metadata` in the dictionary's `metadata.json`
+3. The entry provides the headword (`index_reference`) and localized titles
 
 ```json
-{
-  "references": [
-    ["40001001008|Ἀβραάμ"],
-    ["000011000000000"]
-  ]
+"000003000000000": {
+  "content_id": "000003000000000",
+  "reference_id": "000003000000000",
+  "index_reference": "אָב",
+  "localizations": {
+    "spa": { "content_id": "000003000000000", "language": "spa", "title": "אָב" },
+    "fra": { "content_id": "000003000000000", "language": "fra", "title": "אָב" }
+  }
 }
 ```
 
-**Structure**
+The article content file is at `json/{content_id}.json` within the language folder.
 
-- **`references`**: Array with exactly two elements
-  - **`references[0]`**: Array of source token identifiers (typically one; may be multiple for phrases)
-  - **`references[1]`**: Array of target dictionary entry identifiers (typically one per unique lexeme)
+## Metadata
 
-**Source Token Format**
-
-Source tokens include both the token ID and the word form:
-
-```
-BBCCCVVVWWW|word_form
-```
-
-Example: `40001001008|Ἀβραάμ`
-
-**Many-to-Many Alignments**
-
-While most records align a single Greek/Hebrew word form to a single dictionary entry, the structure supports many-to-many relationships:
-
-```json
-{
-  "references": [
-    ["40001001008|Ἀβραάμ", "40001001009|Ἀβραὰμ"],
-    ["000011000000000"]
-  ]
-}
-```
-
-This would indicate that two different forms (with different diacritics) map to the same dictionary entry, which is typical for inflected languages.
-
-## Token ID Schemes
-
-### SBLGNT (Greek New Testament)
-
-Token IDs use the format: `BBCCCVVVWWW`
-
-- **BB**: Book number (40–66 for NT)
-- **CCC**: Chapter (001–150+)
-- **VVV**: Verse (001–999, though typically ≤chapter verse limit)
-- **WWW**: Word position within the verse (001–999, typically ≤50)
-
-**Examples**
-
-- `40001001001` = Matthew 1:1, word 1
-- `42003016008` = Luke 3:16, word 8
-- `46007004012` = 1 Corinthians 7:4, word 12
-
-### WLCM (Hebrew Old Testament)
-
-Token IDs use the same format as SBLGNT: `BBCCCVVVWWW`
-
-- **BB**: Book number (01–39 for OT)
-- **CCC**: Chapter
-- **VVV**: Verse
-- **WWW**: Word position
-
-**Examples**
-
-- `01001001001` = Genesis 1:1, word 1
-- `19023005003` = Psalms 23:5, word 3
-
-## Relating Alignments to Source Texts
-
-### Accessing SBLGNT Source Tokens
-
-The SBLGNT is based on Biblica's Macula Greek dataset. The complete token list with morphological and linguistic data is available at:
-
-```
-https://github.com/Clear-Bible/macula-greek
-```
-
-The tokenization used in Aquifer alignments matches this dataset exactly. You can:
-
-1. Load the Macula Greek TSV/data files
-2. Construct token IDs using the `BBCCCVVVWWW` format
-3. Look up morphological tags, part-of-speech, lemmas, and Strong's numbers
-
-### Accessing WLCM Source Tokens
-
-The WLCM is based on Biblica's Macula Hebrew dataset:
-
-```
-https://github.com/Clear-Bible/macula-hebrew
-```
-
-The tokenization and token ID format is identical to the Greek alignment tokenization.
-
-### Word Form Enrichment
-
-Alignment records include the actual word form in the token string (e.g., `40001001001|Ἀβραάμ`). This allows direct matching against the text without requiring external lookups, though full morphological data is available in the Macula datasets.
-
-## Relating Alignments to Dictionary Resources
-
-### UBS Dictionary of the Greek New Testament
-
-Dictionary entries are identified by a 9-digit `content_id` in the target identifier's first 9 digits:
-
-```
-000011000000000  → entry ID: 000011
-```
-
-To retrieve the dictionary article:
-
-1. Extract the first 9 digits from the target identifier
-2. Use zero-padding to ensure 9 digits (already done in the alignment file)
-3. Look up this `content_id` in the dictionary resource's `article_metadata`
-4. The `localizations` section contains the article title and localized content IDs
-
-**Example Lookup**
-
-Given alignment record:
-```json
-{
-  "references": [
-    ["40001001008|Ἀβραάμ"],
-    ["000011000000000"]
-  ]
-}
-```
-
-Steps:
-1. Extract entry ID: `000011`
-2. Retrieve `article_metadata["000011"]` from the dictionary's `metadata.json`
-3. Access the article in the JSON files at `json/000011.json`
-4. The article's `title` field contains the dictionary headword (e.g., "Ἀβραάμ")
-
-### UBS Hebrew Dictionary
-
-Same process as Greek dictionary but using `content_id` values from Hebrew dictionary resources and entry IDs from the Hebrew target identifiers.
-
-## Metadata Integration
-
-### Alignment Metadata in `metadata.json`
-
-The dictionary resource's root `metadata.json` contains alignment information:
+The dictionary resource's `metadata.json` lists alignment files under `scripture_burrito.ingredients`:
 
 ```json
 {
   "scripture_burrito": {
     "ingredients": {
+      "alignments/01.alignment.json": {
+        "mimeType": "text/json",
+        "size": 4521389,
+        "scope": { "GEN": [] }
+      },
       "alignments/40.alignment.json": {
         "mimeType": "text/json",
         "size": 1234567,
-        "scope": {"MAT": []}
+        "scope": { "MAT": [] }
       }
     }
   }
 }
 ```
 
-This provides:
-- **Location**: Path to the alignment file
-- **Size**: File size in bytes (useful for download planning)
-- **Scope**: Which biblical books are covered (keyed by USFM book name)
+- **Key**: Path to the alignment file relative to the language folder
+- **`scope`**: USFM book name indicating which book the file covers
+- **`size`**: File size in bytes
 
-### Entry Point for Third Parties
+Enumerate `scripture_burrito.ingredients` to discover which books have alignment data before loading alignment files.
 
-To discover lexical alignments:
+## Relation to Source Text Datasets
 
-1. Load the dictionary resource's `metadata.json`
-2. Iterate through `scripture_burrito.ingredients`
-3. Filter for keys matching `alignments/*.alignment.json`
-4. Extract the scope to understand which books have alignment data
+The token IDs in lexical alignments use the same tokenization as Biblica's Macula datasets:
 
-## Use Cases
+- **Greek** (SBLGNT): [github.com/Clear-Bible/macula-greek](https://github.com/Clear-Bible/macula-greek)
+- **Hebrew** (WLCM): [github.com/Clear-Bible/macula-hebrew](https://github.com/Clear-Bible/macula-hebrew)
 
-### 1. Word-Level Dictionary Lookup
+These datasets provide morphological tagging, lemmas, Strong's numbers, and other word-level data keyed to the same token IDs. Implementors who want to display morphological information alongside dictionary entries can join on the token ID.
 
-Display the Greek/Hebrew word alongside its dictionary entry:
+The [Clear Bible Alignments repository](https://github.com/Clear-Bible/Alignments) contains the upstream source TSVs (`WLCM.tsv`, `SBLGNT.tsv`) from which the enriched token strings in these files are derived.
 
-```
-Matthew 1:1 (SBLGNT): Ἀβραάμ
-  ↓ [via alignment]
-UBS Dictionary entry 11: Ἀβραάμ (Abraham)
-```
-
-### 2. Cross-Reference Navigation
-
-Use alignment data to hyperlink from Bible text to dictionary entries, enabling readers to quickly jump to reference material without manual searching.
-
-### 3. Morphological Analysis
-
-Combine alignment token IDs with Macula datasets to provide:
-- Lemma information
-- Part-of-speech tagging
-- Morphological breakdowns
-- Strong's numbers (where available)
-
-### 4. Lexical Analysis
-
-Aggregate all occurrences of a lexeme across the NT/OT via alignments to identify patterns, frequency data, and contextual usage.
-
-### 5. Multi-Language Dictionary Support
-
-Use alignments as a stable anchor point for translating dictionary entries across language boundaries. Since alignments are keyed to the original language text, they provide consistent reference points regardless of the target language dictionary version.
-
-## Examples
-
-### Example 1: Single Word to Single Entry
-
-```json
-{
-  "references": [
-    ["40001001001|Βίβλος"],
-    ["000001000000000"]
-  ]
-}
-```
-
-The Greek word "Βίβλος" at Matthew 1:1, word 1 aligns to dictionary entry 1.
-
-### Example 2: Variant Forms to Same Entry
-
-```json
-{
-  "references": [
-    ["40001001008|Ἀβραάμ", "40001001009|Ἀβραὰμ"],
-    ["000011000000000"]
-  ]
-}
-```
-
-Two variant spellings of the same name (nominative and accusative with different accentuation) both map to the same dictionary entry. This is common in Greek and Hebrew where morphological variation is expected.
-
-### Example 3: Locating the Dictionary Article
-
-Given this alignment:
-
-```json
-{
-  "references": [
-    ["42003016008|λόγος"],
-    ["000256000000000"]
-  ]
-}
-```
-
-To retrieve the dictionary article:
-
-1. Load the dictionary's `metadata.json`
-2. Find `article_metadata["000256"]`
-3. Retrieve the article:
-   - English: `article.json/000256.json` or `article_metadata["000256"].localizations.eng`
-   - Spanish: `article.json/000256.json` with `article_metadata["000256"].localizations.spa`
-4. The article contains the full definition and examples of how "λόγος" is used
-
-## Integration Guidelines
-
-### Loading Alignment Data
+## Integration Example
 
 ```python
 import json
-from pathlib import Path
 
-alignment_file = Path("40.alignment.json")
-with open(alignment_file) as f:
-    alignment_data = json.load(f)
+# Load alignment file
+with open("40.alignment.json", encoding="utf-8") as f:
+    data = json.load(f)
 
-for group in alignment_data.get("groups", []):
-    source_doc = group["documents"][0]
-    target_doc = group["documents"][1]
-    
-    for record in group.get("records", []):
-        source_tokens = record["references"][0]
-        target_entries = record["references"][1]
-        
-        # Process alignment...
+# Load dictionary article metadata
+with open("metadata.json", encoding="utf-8") as f:
+    metadata = json.load(f)
+article_meta = metadata["article_metadata"]
+
+for group in data["groups"]:
+    for record in group["records"]:
+        source_tokens = record["references"][0]   # e.g. ["40001001008|Ἀβραάμ"]
+        target_entries = record["references"][1]  # e.g. ["000011000000000"]
+
+        for token in source_tokens:
+            token_id, word_form = token.split("|", 1)
+            # token_id encodes book/chapter/verse/word (and part for Hebrew)
+
+        for entry_id in target_entries:
+            article = article_meta.get(entry_id, {})
+            headword = article.get("index_reference", "")
+            # headword is the dictionary entry's lemma form
 ```
 
-### Matching Tokens to Text
+## Related Documentation
 
-The `token-string` portion of source tokens (after the `|`) can be matched directly against rendered Bible text, accounting for Unicode normalization and spacing differences.
-
-### Handling Multiple Targets
-
-When a source token aligns to multiple target entries, treat as separate alignments unless explicitly grouped. Multiple targets typically indicate ambiguous or polysemous usage requiring context-dependent selection.
-
-### Scope Filtering
-
-Use the `scope` information from `scripture_burrito.ingredients` to determine which books have alignment data before attempting to load alignment files.
-
-## Technical Specifications
-
-- **File Format**: JSON (UTF-8 encoding)
-- **Specification Version**: Scripture Burrito v0.4
-- **Token ID Format**: Zero-padded integers with pipe-delimited word forms
-- **Dictionary Entry IDs**: 9-digit zero-padded identifiers
-- **Source Texts**: SBLGNT (Greek), WLCM (Hebrew) tokenization
-
-## Related Resources
-
-- **Macula Greek**: https://github.com/Clear-Bible/macula-greek
-- **Macula Hebrew**: https://github.com/Clear-Bible/macula-hebrew
-- **Scripture Burrito Alignment Specification**: https://github.com/bible-technology/alignment-spec/blob/main/spec.md
-
+- [Aquifer Alignments](aquifer_alignments.md) — textual alignments between Bible translations
+- [Aquifer Resource Metadata](aquifer_resource_metadata.md) — full `metadata.json` structure
+- [Aquifer Article Metadata](aquifer_article_metadata.md) — article content and metadata structure
