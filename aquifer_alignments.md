@@ -11,14 +11,14 @@ If a Bible translation has associated alignment metadata, paths to the files wil
 **Book-level entries (v0.3)** — a single file covers an entire book; `scope` is an empty array:
 
 ```json
-  "alignments/01.alignment.json": {
+  "alignments/json/01.alignment.json": {
     "mimeType": "text/json",
     "size": 5362569,
     "scope": {
       "GEN": []
     }
   },
-  "alignments/02.alignment.json": {
+  "alignments/json/02.alignment.json": {
     "mimeType": "text/json",
     "size": 4349395,
     "scope": {
@@ -30,14 +30,14 @@ If a Bible translation has associated alignment metadata, paths to the files wil
 **Chapter-level entries (v0.4)** — one file per chapter; `scope` lists the single chapter number:
 
 ```json
-  "alignments/40-001.alignment.json": {
+  "alignments/json/40-001.alignment.json": {
     "mimeType": "text/json",
     "size": 98432,
     "scope": {
       "MAT": ["1"]
     }
   },
-  "alignments/40-002.alignment.json": {
+  "alignments/json/40-002.alignment.json": {
     "mimeType": "text/json",
     "size": 112045,
     "scope": {
@@ -81,9 +81,22 @@ The TSV data referred to as underlying basis utilize the same tokenization ident
 
 ## Alignment Information in `/[lang]/alignments/`
 
+The `alignments/` directory is organized into three subfolders:
+
+```
+alignments/
+  json/                     ← alignment JSON files (registered as SB ingredients)
+  tsv/                      ← tokenization TSV files for source and target texts
+  viz/                      ← HTML alignment visualizations (where available)
+    WLCM-{abbrev}/          ← OT visualizations (source: WLCM vs. translation)
+    SBLGNT-{abbrev}/        ← NT visualizations (source: SBLGNT vs. translation)
+```
+
+### `json/`
+
 Aquifer alignment data uses two versions of the Scripture Burrito textual alignment specification. Both follow implementation practices established by Biblica (see their [available alignment data repository](https://github.com/Clear-Bible/Alignments)).
 
-### Alignment Format Versions
+#### Alignment Format Versions
 
 **v0.3** is the legacy format. It is being phased out as higher-quality v0.4 data becomes available. v0.3 files cover one book per file and use a flat top-level structure (`documents`, `meta`, `roles`, `type`, `records`).
 
@@ -91,15 +104,15 @@ Aquifer alignment data uses two versions of the Scripture Burrito textual alignm
 
 For a given book, only one format will be present: v0.4 where the entire book has been refined; v0.3 otherwise.
 
-### Files
+#### Files
 
 Book-level files (`{BB}.alignment.json`, e.g. `01.alignment.json`) are v0.3 and cover a whole book. Chapter-level files (`{BB}-{CCC}.alignment.json`, e.g. `40-001.alignment.json`) are v0.4 and cover a single chapter.
 
-### `documents`
+#### `documents`
 
 The `documents` array identifies the source and target texts and the token ID scheme each uses. The first entry is always the source (original language); the second is the target (translation).
 
-#### v0.3 `documents` example
+##### v0.3 `documents` example
 
 The following is from the Berean Standard Bible's `40.alignment.json` file (Matthew, v0.3 format):
 
@@ -118,7 +131,7 @@ The following is from the Berean Standard Bible's `40.alignment.json` file (Matt
 
 In v0.3, the SBLGNT source uses `BCVWP` (prefix-Book-Chapter-Verse-Word-Part). The prefix identifies the testament: `n` for New Testament, `o` for Old Testament. So `n40001001001` is Matthew 1:1 word 1, and `o010010010011` is Genesis 1:1 word 1 part 1. The BSB target uses `BCVW` (Book-Chapter-Verse-Word, no prefix), so `40001001001` is Matthew 1:1 word 1.
 
-#### v0.4 `documents` example
+##### v0.4 `documents` example
 
 The following is from the Berean Standard Bible's `40-001.alignment.json` file (Matthew 1, v0.4 format). In v0.4, `documents` is nested inside `groups[0]`:
 
@@ -144,11 +157,11 @@ In v0.4, **both** source and target use the `BCVWP` scheme and neither carries a
 
 In both formats the pipe (`|`) is a delimiter and the `token-string` portion is the surface form of the word from that edition.
 
-### `records`
+#### `records`
 
 A **record** is an **alignment unit**: a many-to-many association between a set of source token identifiers and a set of target token identifiers. Both source and target include the surface form after the `|` delimiter so implementors can match against the text directly without a separate lookup.
 
-#### v0.3 records
+##### v0.3 records
 
 ```json
 "records": [
@@ -173,7 +186,7 @@ A **record** is an **alignment unit**: a many-to-many association between a set 
 
 The `meta` block carries a record identifier and provenance fields. These are typically uniform across a translation and are of little interest to most implementors.
 
-#### v0.4 records
+##### v0.4 records
 
 v0.4 records carry richer metadata. Source token IDs have no testament prefix; both source and target use the `BCVWP` scheme.
 
@@ -225,7 +238,7 @@ Record-level `meta` fields:
 
 Tokens absent from `secondary.source` / `secondary.target` are primary alignments. `is_idiom` and `secondary` are mutually exclusive on any given record.
 
-#### v0.4 group-level `meta`
+##### v0.4 group-level `meta`
 
 The group `meta` object carries three kinds of information:
 
@@ -266,6 +279,30 @@ Source tokens in `nonEquivalent.source` are original-language words with no tran
 
 `retry_llm` is only present when a retry pass has been run. These fields are informational; implementors do not need to act on them.
 
+
+### `tsv/`
+
+The `tsv/` folder contains the raw tokenization files used to construct and interpret the alignment data. Four files are present for each Bible that has alignment data:
+
+| File | Description |
+|---|---|
+| `ot_{abbrev}.tsv` | Target-text tokenization of the Old Testament (translation-specific) |
+| `nt_{abbrev}.tsv` | Target-text tokenization of the New Testament (translation-specific) |
+| `WLCM.tsv` | Source tokenization of the Westminster Leningrad Codex (WLCM) used as the OT basis |
+| `SBLGNT.tsv` | Source tokenization of the SBL Greek New Testament (SBLGNT) used as the NT basis |
+
+The target TSVs (`ot_` / `nt_`) use the same token ID scheme as the alignment `target` arrays, so a token ID in an alignment record can be looked up directly in these files. The source TSVs (`WLCM.tsv`, `SBLGNT.tsv`) use the same token ID scheme as the alignment `source` arrays and include additional word-level data such as morphology, part of speech, Strongs numbers, and lemmas.
+
+These files are not registered as Scripture Burrito ingredients; they are supporting data for implementors who need to resolve token strings or enrich alignment output with lexical information.
+
+### `viz/`
+
+The `viz/` folder contains HTML alignment visualization files where they are available. Not all Bibles will have a `viz/` folder. Visualizations are organized by source text:
+
+- `WLCM-{abbrev}/` — OT visualizations (Hebrew source vs. translation)
+- `SBLGNT-{abbrev}/` — NT visualizations (Greek source vs. translation)
+
+Each subfolder contains per-chapter HTML files that render the alignment interactively. These files are self-contained and can be opened directly in a browser. They are not registered as Scripture Burrito ingredients.
 
 ## Suggestions on Display of Alignment data
 
