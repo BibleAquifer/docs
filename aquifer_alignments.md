@@ -2,6 +2,8 @@
 
 Documentation on textual alignment data for Bibles available in the Aquifer.
 
+Textual alignments in the Aquifer are migrating from **Scripture Burrito v0.3** alignments to **Scripture Burrito v0.4** alignments. The **v0.4** alignments are completely new and completely automated. For the process, see the [text-align repository](https://github.com/BibleAquifer/text-align)). These alignments are provisional and while they should be generally acceptible they will have shortcomings.
+
 ## Alignment information in `/[lang]/metadata.json`
 
 ### `scripture_burrito/ingredients/`
