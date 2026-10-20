@@ -9,6 +9,8 @@ The Aquifer API serves Bible study resources (dictionaries, study notes, transla
 * [Interactive API explorer](https://api2.aquifer.bible/docs): Interactive browser of every endpoint and its parameters; the OpenAPI document is at <https://api2.aquifer.bible/openapi.json>. No API key is needed to view either.
 * [API Reference](api_reference.md): Every endpoint, with conventions (pagination, passage reference notations, content formats, authentication and rate limits), query parameters, response shapes and errors.
 * [v1 to v2 Migration Guide](v1_to_v2_migration_guide.md): Field-by-field mapping and behavior changes for consumers moving from the retired v1 API to v2.
+* [aquifer-api-client](https://github.com/BibleAquifer/aquifer-api-client): A Python client with typed access to the API (Bibles, resources and articles, word alignment, ACAI).
+* [aquifer-api-client-demo](https://github.com/BibleAquifer/aquifer-api-client-demo): A very brief demo of the client. It downloads every article of a small resource in English and in a non-Roman-script language.
 
 ## Data formats
 
