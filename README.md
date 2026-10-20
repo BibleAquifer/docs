@@ -6,7 +6,7 @@ Documentation for the Aquifer data formats (JSON schemas, alignments) and for th
 
 The Aquifer API serves Bible study resources (dictionaries, study notes, translation guides, lexicons, images and video), Bible texts with Greek/Hebrew word alignment, passage lookups, and the ACAI registry of people, places and other entities in the Bible. The API is at <https://api2.aquifer.bible>. Every request needs an `api-key` header; to get a key, sign up at <https://www.aquifer.bible/apiaccess>.
 
-* [Interactive API explorer](https://api2.aquifer.bible/docs): Swagger UI for trying endpoints live; the OpenAPI document is at <https://api2.aquifer.bible/openapi.json>. Neither needs an API key to view, but requests you send from it do.
+* [Interactive API explorer](https://api2.aquifer.bible/docs): Interactive browser of every endpoint and its parameters; the OpenAPI document is at <https://api2.aquifer.bible/openapi.json>. No API key is needed to view either.
 * [API Reference](api_reference.md): Every endpoint, with conventions (pagination, passage reference notations, content formats, authentication and rate limits), query parameters, response shapes and errors.
 * [v1 to v2 Migration Guide](v1_to_v2_migration_guide.md): Field-by-field mapping and behavior changes for consumers moving from the retired v1 API to v2.
 
