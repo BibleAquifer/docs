@@ -168,7 +168,11 @@ exposes in bulk. Each is cross-referenced under **See also** below:
 
 Every language the API has content for, with static language metadata.
 
-**Query params:** none.
+**Query params:**
+
+| Param | Notes |
+|---|---|
+| `include` | `all` also lists supported languages that have no content yet (`ingested: false`, `resource_count: 0`). Any other value → 400. |
 
 **Response:**
 
@@ -176,6 +180,7 @@ Every language the API has content for, with static language metadata.
 |---|---|---|
 | `languages` | array | |
 | `languages[].language` | string | ISO 639-3 code, e.g. `"eng"` |
+| `languages[].ingested` | bool | `true` when the API has content for this language |
 | `languages[].resource_count` | int | number of resources available in this language |
 | `languages[].name` | string \| null | cleaned English display name; `null` if not in the static registry |
 | `languages[].localized_name` | string \| null | native name; `null` when none is available |
@@ -189,6 +194,7 @@ Every language the API has content for, with static language metadata.
   "languages": [
     {
       "language": "eng",
+      "ingested": true,
       "resource_count": 21,
       "name": "English",
       "localized_name": "English",
@@ -518,7 +524,7 @@ One language's full resource detail — the natural parent of
 | `release_tag` | string \| null | the release tag `download_url` came from |
 | `download_urls` | object \| null | `{kind: [{url, size_bytes}]}`, narrowed by `?format=` if given |
 | `formats` | array\<string\> | downloadable content formats for this resource+language |
-| `by_book` | array | **canonical-order resources only** — per-book existence + translation stats |
+| `by_book` | array | **canonical-order resources only** — the books the edition has content for (each article's own book, from its `index_reference`; passages an article merely cites don't add a book) plus per-book translation stats |
 | `available_languages` | array\<string\> | bare language-code list (not the fat rollup) |
 
 `by_book[]` entry:
