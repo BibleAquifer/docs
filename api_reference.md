@@ -737,7 +737,9 @@ requested.
 
 One article's forward links: the passages it is about and the other articles it references.
 
-**Query params:** none.
+**Query params:** `page` (default 1), `per_page` (default 500, max 1000 — most articles fit in one page). Both lists are paged with the same window, independently; each list's totals are in `pagination`. Keep paging while either `has_more` is true.
+
+**Caching:** responses carry an `ETag` and `Cache-Control: private, max-age=300, must-revalidate`. Send `If-None-Match` to get a bodyless `304` when the article is unchanged. Article data only changes when the nightly ingest rewrites it, so cache per article rather than re-requesting.
 
 **Response:**
 
@@ -746,6 +748,10 @@ One article's forward links: the passages it is about and the other articles it 
   "resource_code": "AquiferOpenBibleDictionary",
   "language": "eng",
   "content_id": "3263",
+  "pagination": {
+    "passage_associations": {"page": 1, "per_page": 500, "total": 1, "has_more": false},
+    "resource_associations": {"page": 1, "per_page": 500, "total": 1, "has_more": false}
+  },
   "passage_associations": [
     {
       "start_book": 2, "start_book_code": "EXO", "start_chapter": 4, "start_verse": 14,
@@ -771,7 +777,7 @@ another lookup.
 "article not found" for an unknown `content_id`.
 
 **See also:** the same rows attach to each item of the bulk
-`.../articles?include=associations` response.
+`.../articles?include=associations` response. To fetch associations for many articles, use that bulk call instead of one request per article.
 
 ---
 
